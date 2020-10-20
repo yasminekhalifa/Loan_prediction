@@ -27,15 +27,15 @@
             </div>
           </div>
         <div class="form-group">
-          <label for="exampleFormControlSelect1">Gender</label>
-          <select class="form-control" id="exampleFormControlSelect1">
+          <label for="gender">Gender</label>
+          <select class="form-control" id="gender">
             <option>Male</option>
             <option>Female</option>
           </select>
         </div>
         <div class="form-group">
-          <label for="exampleFormControlSelect2">Number of dependents</label>
-          <select multiple class="form-control" id="exampleFormControlSelect2">
+          <label for="dep">Number of dependents</label>
+          <select multiple class="form-control" id="dep">
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -43,19 +43,21 @@
           </select>
         </div>
         <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Graduate</label>
+            <input type="checkbox" class="form-check-input" id="graduate">
+            <label class="form-check-label" for="graduate">Graduate</label>
           </div>  
           <div class="form-group form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Self employed</label>
+            <input type="checkbox" class="form-check-input" id="self">
+            <label class="form-check-label" for="self">Self employed</label>
           </div>
         <div class="form-group">
-          <label for="exampleFormControlTextarea1">Loan amount</label>
-          <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+          <label for="loan">Loan amount</label>
+          <textarea class="form-control" id="loan" rows="1"></textarea>
         </div>
-        <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Predict</a></p>
+        <p><a class="btn btn-primary btn-lg" onclick = "sendJSON()" role="button">Predict</a></p>
       </form>
 </body>
+<script src="../app.js"></script>
+
 </html>
 
