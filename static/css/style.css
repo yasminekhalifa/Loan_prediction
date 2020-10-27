@@ -1,0 +1,25 @@
+#result{
+  width: 100%;
+  text-align: center;
+  font-size: 2em;
+}
+
+.green{
+  color: green;
+}
+
+.red{
+  color: red;
+}
+
+.show{
+  display: flex;
+}
+
+.showForm{
+  display: block;
+}
+
+.dont-show{
+  display: none;
+}
