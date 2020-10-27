@@ -14,3 +14,4 @@ Werkzeug==1.0.1
 wheel==0.35.1
 wincertstore==0.2
 pandas==1.0.1
+sklearn==0.23.2
