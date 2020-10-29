@@ -1,3 +1,8 @@
+function scroll(){
+    window.scrollTo(0,100);
+}
+
+
 function showForm(){
     d3.select("#form").attr("class", "showForm");
     d3.select("#back").attr("class", "dont-show");
@@ -8,6 +13,8 @@ function showForm(){
 }
 
 function sendJSON() {
+    let fname = document.querySelector('#fname');
+    let lname = document.querySelector('#lname');
     let gender = document.querySelector('#gender');
     let dep = document.querySelector('#dep');
     let graduate = document.querySelector('#graduate');
@@ -22,9 +29,9 @@ function sendJSON() {
     console.log(gender.value, dep.value, graduate.value, self.value, loan.value)
     // Converting JSON data to string 									
     var data = {
-        "ApplicantIncome": aincome.value.trim() ? aincome.value.trim() : 0,
+        "ApplicantIncome": aincome.value ? aincome.value : 0,
         "CoapplicantIncome": cincome.value.trim() ? cincome.value.trim() : 0,
-        "LoanAmount": loan.value.trim() ? loan.value.trim() / 100 : 0,
+        "LoanAmount": loan.value ? loan.value / 100 : 0,
         "Loan_Amount_Term": loanterm.value.trim() ? loanterm.value.trim() : 0,
         "Gender": gender.value.trim() === "Male" ? 1 : 0,
         "Married_Yes": married.value.trim() === "Married" ? 1 : 0,
@@ -49,7 +56,9 @@ function sendJSON() {
 }
 
 function populateCards(data){
-    d3.select("#result").html("Approved");
+    d3.select("#result").html(
+        "<p>Hey "+ fname.value + lname.value +"</p>"+"<br>"
+        +"<p>The model predicted your loan will be approved" +"</p>")
     for(i=0;i<data["banks"].length;i++){
         d3.select("#cardImage"+(i+1)).attr("src",data["banks"][i]["image"])
         d3.select("#cardTitle"+(i+1)).html(data["banks"][i]["name"])
@@ -60,13 +69,17 @@ function populateCards(data){
 }
 
 function showRecommendations(data){
-    d3.select("#result").html("Rejected");
+    d3.select("#result").html(     
+    "<p>Hey "+ fname.value + lname.value +"</p>"+"<br>"
+    +"<p>The model predicted your loan will be rejected" +"</p>");
     d3.select("#recomendations").html(
         "<ul>"
         +"<li> Your income to be increased to: "+ data["income_updated"] +"</li>"
-        +"<li> Your loan ammount to be decreased to: "+data["loan_amount_updated"]+"</li>"
+        +"<p> OR" +"<p>"
+        +"<li> Your loan amount to be decreased to: "+data["loan_amount_updated"]+"</li>"
+        +"<p> OR" +"</p>"
         +"<li> Your income to be increased to: "+data["income_linked"]+
-        " and loan ammount to be decreased to: "+data["loan_amount_linked"]+"</li>"+
+        " and loan amount to be decreased to: "+data["loan_amount_linked"]+"</li>"+
         "</ul>"
         )
 }

@@ -23,3 +23,48 @@
 .dont-show{
   display: none;
 }
+
+.jumbotron{
+  background-color:#006600;
+  text-align:center;
+}
+
+/* Required for full background image */
+
+html,
+body,
+header,
+.view {
+  height: 100%;
+}
+
+@media (max-width: 740px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 1000px;
+  }
+}
+@media (min-width: 800px) and (max-width: 850px) {
+  html,
+  body,
+  header,
+  .view {
+    height: 600px;
+  }
+}
+
+.btn .fa {
+  margin-left: 3px;
+}
+
+
+.btn-white {
+  color: black !important;
+}
+
+h6 {
+  line-height: 1.7;
+}
+

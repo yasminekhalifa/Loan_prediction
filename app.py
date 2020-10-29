@@ -6,8 +6,8 @@ import pandas as pd
 app = flask.Flask(__name__)
 
 #loading my model
-model = pickle.load(open("model.pkl","rb"))
-cluster_model = pickle.load(open("cluster.pkl","rb"))
+model = pickle.load(open("model/model.pkl","rb"))
+cluster_model = pickle.load(open("model/cluster.pkl","rb"))
 high_risk = {'pred':'1','risk':'High','banks':[{"name": "NAB", "loan": "unsecured personal loan fixed", "fixed rate": "12.69%", "image": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/National_Australia_Bank.svg/1200px-National_Australia_Bank.svg.png" },
             {"name": "ANZ", "loan": "personal loan fixed", "fixed rate": "10.5%", "image": "https://anz.brandkit.io/a/49963"}]}
 

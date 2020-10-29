@@ -17,8 +17,51 @@
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/style.css">
 </head>
+    <!-- Main navigation -->
+    <header>
+        <!-- Full Page Intro -->
+        <div class="view" style="background-image: url('https://s3.amazonaws.com/pas-wordpress-media/content/uploads/2015/04/bankloan-e1427929452613.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+          <!-- Mask & flexbox options-->
+            <!-- Content -->
+            <div class="container">
+              <!--Grid row-->
+              <div class="row">
+                <!--Grid column-->
+                <div class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
+                  <h1 class="h1-responsive font-weight-bold mt-sm-5">Loan predictor</h1>
+                  <hr class="hr-light">
+                  <h6 class="mb-4">Machine learning project in Python using sciket-learn and Flask; to predict loan eligibility using mock data</h6>
+                        <!--Main Layout-->
+                    <div class="container">
+                    <button onclick="window.scrollTo(0,800)" type="button" class="btn btn-secondary btn-lg">Let's predict</button>
+                     </div>
+                </div>
+
+                <!--Grid column-->
+              </div>
+              <!--Grid row-->
+            </div>
+            <!-- Content -->
+          </div>
+          <!-- Mask & flexbox options-->
+        </div>
+        <!-- Full Page Intro -->
+      </header>
+      <!-- Main navigation -->
+      <!--Main Layout-->
+      <main>
+        <div class="container">
+          <!--Grid row-->
+          <div class="row py-5">
+            <!--Grid column-->
+          </div>
+          <!--Grid row-->
+        </div>
+      </main>
 
 <body>
+
+  <!--Main Layout-->
     <div class="container">
         <div class="jumbotron text-center">
             <h1>Loan predictor</h1>
@@ -27,12 +70,12 @@
         <form id="form">
             <div class="form-row">
                 <div class="form-group col-md-6">
-                    <label for="inputEmail4">First Name</label>
-                    <input class="form-control" id="inputEmail4" placeholder="First name">
+                    <label for="fname">First Name</label>
+                    <input class="form-control" id="fname" placeholder="First name">
                 </div>
                 <div class="form-group col-md-6">
-                    <label for="inputPassword4">Last Name</label>
-                    <input class="form-control" id="inputPassword4" placeholder="Last name">
+                    <label for="lname">Last Name</label>
+                    <input class="form-control" id="lname" placeholder="Last name">
                 </div>
             </div>
             <div class="form-group">
@@ -60,7 +103,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <label for="dep">Loan Amount Term</label>
+                <label for="dep">Loan Amount Term (In days)</label>
                 <select multiple class="form-control" id="loanterm">
                     <option>60</option>
                     <option>120</option>
@@ -74,7 +117,7 @@
             <div class="form-group">
                 <label for="dep">Number of Dependents</label>
                 <select multiple class="form-control" id="dep">
-                    <option>0</option>
+                    <option selected="selected">0</option>
                     <option>1</option>
                     <option>2</option>
                     <option>3</option>
@@ -94,18 +137,19 @@
                 <textarea class="form-control" id="loan" rows="1"></textarea>
             </div>
             <div class="form-group">
-                <label for="aincome">Applicant Income</label>
+                <label for="aincome">Applicant Income (Monthly)</label>
                 <textarea class="form-control" id="aincome" rows="1"></textarea>
             </div>
             <div class="form-group">
-                <label for="cincome">Co-applicant Income</label>
+                <label for="cincome">Co-applicant Income (Monthly)</label>
                 <textarea class="form-control" id="cincome" rows="1"></textarea>
             </div>
             <p><a id="submit" class="btn btn-primary btn-lg" onclick="sendJSON()" role="button">Predict</a></p>
         </form>
 
         <div id="result" class="dont-show"></div>
-        
+
+
         <!-- this shows only when the prediction is approved and shows cards for reccomendations -->
         <div id ="approve" class="card-deck dont-show">
             <div class="card">
