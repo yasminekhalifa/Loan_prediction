@@ -9,6 +9,8 @@ app = flask.Flask(__name__)
 #Defining a route for rendering home page
 @app.route('/', methods=['GET','POST'])
 def index():
+    #Loading my model
+    model = pickle.load(open("model/model.pkl","rb"))
     if request.method == 'GET':
         return render_template('index.html')
     else:
@@ -41,6 +43,7 @@ def get_risk_level(feature_df):
     low_risk = {'pred':'1','risk':'Low','banks':[{"name": "Latitude", "loan": "secured fixed low rate", "fixed rate": "6.49%", "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F57793044%2F68388708205%2F1%2Foriginal.20190304-070337?auto=compress&s=70c45f2e99f7bc7d286c4626773ea1f0"},
                 {"name": "SocietyOne", "loan": "low rate personal loan", "fixed rate": "6.99%", "image": "https://www.bestfind.com.au/wp-content/uploads/2017/07/logo-societyone.gif"}]}
 
+    cluster_model = pickle.load(open("model/cluster.pkl","rb"))
     prediction = cluster_model.predict(feature_df)[0]
     print(prediction)
     if prediction == 1:
@@ -50,6 +53,7 @@ def get_risk_level(feature_df):
 
 # Returning 3 recommendation options using a loop through income and loan amount 
 def get_recommendation(feature_df,income,loan_amount):
+    model = pickle.load(open("model/model.pkl","rb"))
     prediction = model.predict(feature_df)[0]
     my_df = feature_df.copy()
     while prediction == 0 and int(my_df["ApplicantIncome"]) > 0 and int(my_df["LoanAmount"]) > 0:
@@ -81,7 +85,4 @@ def get_recommendation(feature_df,income,loan_amount):
 
 
 if __name__ == "__main__":
-    #Loading my model
-    model = pickle.load(open("model/model.pkl","rb"))
-    cluster_model = pickle.load(open("model/cluster.pkl","rb"))
     app.run(debug=True)
