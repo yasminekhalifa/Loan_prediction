@@ -29,7 +29,7 @@ X_train = imp_train.transform(X)
 from sklearn.cluster import KMeans
 import numpy as np
 # create kmeans object
-kmeans = KMeans(n_clusters=2,algorithm='full')
+kmeans = KMeans(n_clusters=2)
 labels = [0 , 1]
 # fit kmeans object to data
 kmeans.fit(X_train)

@@ -73,16 +73,22 @@ function showRecommendations(data){
         "<p>Hey "+ fname.value +" "+ lname.value +"</p>"+"<br>")    
     d3.select("#result").html(     
     "<p>The model predicted your loan will be rejected" +"</p>");
-    d3.select("#recomendations").html(
-        "<ul>"
-        +"<li> Your income to be increased to: "+ data["income_updated"] +"</li>"
-        +"<p> OR" +"<p>"
-        +"<li> Your loan amount to be decreased to: "+data["loan_amount_updated"]+"</li>"
-        +"<p> OR" +"</p>"
-        +"<li> Your income to be increased to: "+data["income_linked"]+
-        " and loan amount to be decreased to: "+data["loan_amount_linked"]+"</li>"+
-        "</ul>"
-        )
+    if(data["loan_amount_updated"] > 0){
+        d3.select("#recomendations").html(
+            "<ul>"
+            +"<li> Your income to be increased to: "+ data["income_updated"] +"</li>"
+            +"<p> OR" +"<p>"
+            +"<li> Your loan amount to be decreased to: "+data["loan_amount_updated"]+"</li>"
+            +"<p> OR" +"</p>"
+            +"<li> Your income to be increased to: "+data["income_linked"]+
+            " and loan amount to be decreased to: "+data["loan_amount_linked"]+"</li>"+
+            "</ul>"
+            )
+    }else{
+        d3.select("#recomendations").html(
+            "<p> Unfortanatly, we can't recommend you a loan for your current sitiuation"
+        )}
+    
 }
 
 // calling populating functions according to prediction 

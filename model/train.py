@@ -28,7 +28,7 @@ imp_train = imp.fit(X_train)
 X_train = imp_train.transform(X_train)
 X_test_imp = imp_train.transform(X_test)
 
-tree_clf = DecisionTreeClassifier(criterion='gini', max_depth = 3, min_samples_leaf = 2, splitter = 'random')
+tree_clf = DecisionTreeClassifier(criterion='gini', max_depth = 11, min_samples_leaf = 4, splitter = 'random')
 tree_clf.fit(X_train,y_train)
 
 #exporting my model

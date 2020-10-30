@@ -43,7 +43,7 @@ def get_risk_level(feature_df):
 
     prediction = cluster_model.predict(feature_df)[0]
     print(prediction)
-    if prediction == 0:
+    if prediction == 1:
         return low_risk
     else:
        return high_risk
@@ -73,11 +73,6 @@ def get_recommendation(feature_df,income,loan_amount):
         prediction = model.predict(my_df2)[0]
     income_updated = my_df2["ApplicantIncome"][0]
 
-    print(income_updated)
-    print(loan_amount_updated)
-    print(income_linked)
-    print(loan_amount_linked)
-    print(feature_df)
     return {'pred':'0',
             "income_updated":str(income_updated),
             "loan_amount_updated":str(loan_amount_updated),
@@ -86,9 +81,7 @@ def get_recommendation(feature_df,income,loan_amount):
 
 
 if __name__ == "__main__":
-
     #Loading my model
     model = pickle.load(open("model/model.pkl","rb"))
     cluster_model = pickle.load(open("model/cluster.pkl","rb"))
-
     app.run(debug=True)
