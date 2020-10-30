@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Hot Finds</title>
+    <title>Loan predictor</title>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -28,9 +28,9 @@
               <div class="row">
                 <!--Grid column-->
                 <div class="col-md-6 white-text text-center text-md-left mt-xl-5 mb-5 wow fadeInLeft" data-wow-delay="0.3s">
-                  <h1 class="h1-responsive font-weight-bold mt-sm-5">Loan predictor</h1>
+                  <h1 class="h1-responsive font-weight-bold mt-sm-5" style="color:azure;">Loan predictor</h1>
                   <hr class="hr-light">
-                  <h6 class="mb-4">Machine learning project in Python using sciket-learn and Flask; to predict loan eligibility using mock data</h6>
+                  <h6 class="mb-4" style="color:azure;">Machine learning project in Python using sciket-learn and Flask; to predict loan eligibility using mock data</h6>
                         <!--Main Layout-->
                     <div class="container">
                     <button onclick="window.scrollTo(0,800)" type="button" class="btn btn-secondary btn-lg">Let's predict</button>
@@ -147,20 +147,22 @@
             <p><a id="submit" class="btn btn-primary btn-lg" onclick="sendJSON()" role="button">Predict</a></p>
         </form>
 
+        <div id="greet" class="dont-show"></div>
         <div id="result" class="dont-show"></div>
+
 
 
         <!-- this shows only when the prediction is approved and shows cards for reccomendations -->
         <div id ="approve" class="card-deck dont-show">
             <div class="card">
-                <img src="..." class="card-img-top" id="cardImage1">
+                <img class="card-img-top" id="cardImage1">
                 <div class="card-body">
                     <h5 class="card-title" id="cardTitle1"></h5>
                     <p class="card-text" id="cardInfo1"></p>
                 </div>
             </div>
             <div class="card">
-                <img src="..." class="card-img-top" id="cardImage2">
+                <img class="card-img-top" id="cardImage2">
                 <div class="card-body">
                     <h5 class="card-title" id="cardTitle2"></h5>
                     <p class="card-text" id="cardInfo2"></p>

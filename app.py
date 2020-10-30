@@ -1,24 +1,16 @@
+# Importing libraries
 import pickle
 import flask
 import json
 from flask import request, render_template, redirect, url_for
 import pandas as pd 
+
 app = flask.Flask(__name__)
-
-#loading my model
-model = pickle.load(open("model/model.pkl","rb"))
-cluster_model = pickle.load(open("model/cluster.pkl","rb"))
-high_risk = {'pred':'1','risk':'High','banks':[{"name": "NAB", "loan": "unsecured personal loan fixed", "fixed rate": "12.69%", "image": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/National_Australia_Bank.svg/1200px-National_Australia_Bank.svg.png" },
-            {"name": "ANZ", "loan": "personal loan fixed", "fixed rate": "10.5%", "image": "https://anz.brandkit.io/a/49963"}]}
-
-low_risk = {'pred':'1','risk':'Low','banks':[{"name": "Latitude", "loan": "secured fixed low rate", "fixed rate": "6.49%", "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F57793044%2F68388708205%2F1%2Foriginal.20190304-070337?auto=compress&s=70c45f2e99f7bc7d286c4626773ea1f0"},
-            {"name": "SocietyOne", "loan": "low rate personal loan", "fixed rate": "6.99%", "image": "https://www.bestfind.com.au/wp-content/uploads/2017/07/logo-societyone.gif"}]}
-
-#defining a route for rendering home page
+#Defining a route for rendering home page
 @app.route('/', methods=['GET','POST'])
 def index():
     if request.method == 'GET':
-        return render_template('index.html',show=False)
+        return render_template('index.html')
     else:
         # getting an array of features from the post request's body
         feature_dict = request.get_json()
@@ -40,14 +32,23 @@ def index():
             pred = get_risk_level(feature_df)
         return flask.jsonify(pred)
 
+# Storing the clustering model's prediction
 def get_risk_level(feature_df):
+    # Dictionaries used to populate loan recommendation cards 
+    high_risk = {'pred':'1','risk':'High','banks':[{"name": "NAB", "loan": "unsecured personal loan fixed", "fixed rate": "12.69%", "image": "https://upload.wikimedia.org/wikipedia/en/thumb/f/fa/National_Australia_Bank.svg/1200px-National_Australia_Bank.svg.png" },
+                {"name": "ANZ", "loan": "personal loan fixed", "fixed rate": "10.5%", "image": "https://anz.brandkit.io/a/49963"}]}
+
+    low_risk = {'pred':'1','risk':'Low','banks':[{"name": "Latitude", "loan": "secured fixed low rate", "fixed rate": "6.49%", "image": "https://img.evbuc.com/https%3A%2F%2Fcdn.evbuc.com%2Fimages%2F57793044%2F68388708205%2F1%2Foriginal.20190304-070337?auto=compress&s=70c45f2e99f7bc7d286c4626773ea1f0"},
+                {"name": "SocietyOne", "loan": "low rate personal loan", "fixed rate": "6.99%", "image": "https://www.bestfind.com.au/wp-content/uploads/2017/07/logo-societyone.gif"}]}
+
     prediction = cluster_model.predict(feature_df)[0]
     print(prediction)
     if prediction == 0:
-        return high_risk
+        return low_risk
     else:
-       return low_risk
+       return high_risk
 
+# Returning 3 recommendation options using a loop through income and loan amount 
 def get_recommendation(feature_df,income,loan_amount):
     prediction = model.predict(feature_df)[0]
     my_df = feature_df.copy()
@@ -67,7 +68,7 @@ def get_recommendation(feature_df,income,loan_amount):
 
     my_df2 = feature_df.copy()
     prediction = 0
-    while prediction == 0 and int(my_df2["LoanAmount"]) > 0:
+    while prediction == 0 and int(my_df2["ApplicantIncome"]) < int(feature_df["ApplicantIncome"])*2:
         my_df2["ApplicantIncome"] = int(my_df2["ApplicantIncome"]) + 500
         prediction = model.predict(my_df2)[0]
     income_updated = my_df2["ApplicantIncome"][0]
@@ -76,6 +77,7 @@ def get_recommendation(feature_df,income,loan_amount):
     print(loan_amount_updated)
     print(income_linked)
     print(loan_amount_linked)
+    print(feature_df)
     return {'pred':'0',
             "income_updated":str(income_updated),
             "loan_amount_updated":str(loan_amount_updated),
@@ -84,4 +86,9 @@ def get_recommendation(feature_df,income,loan_amount):
 
 
 if __name__ == "__main__":
+
+    #Loading my model
+    model = pickle.load(open("model/model.pkl","rb"))
+    cluster_model = pickle.load(open("model/cluster.pkl","rb"))
+
     app.run(debug=True)
